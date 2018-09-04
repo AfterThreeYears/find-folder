@@ -5,7 +5,7 @@ const _ = require('lodash');
 
 promisifyAll(fs);
 
-async function foo(p) {
+module.exports = async function foo(p) {
   if (_.isString(p)) p = [{ path: p.trim(), type: 'dir' }];
   if (_.isEmpty(p)) return [];
   // 获取该目录下所有的文件
@@ -45,6 +45,3 @@ async function generta(p) {
   return dirs;
 }
 
-(async () => {
-  console.log(await foo('/tmp/a'));
-})()
