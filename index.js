@@ -25,7 +25,7 @@ async function collect(route) {
 
 async function findFolder(p) {
   if (_.isEmpty(p)) return [];
-  // 获取该目录下所有的文件
+  // Get all the files in this directory
   let dirs = [];
   for (let i = 0; i < p.length; i += 1) {
     let route = p[i];
@@ -50,5 +50,6 @@ module.exports = function main(p) {
     return findFolder(p);
   } catch (error) {
     console.error('[find-folder]: error is', error);
+    process.exit(1);
   }
 };

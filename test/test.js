@@ -5,6 +5,6 @@ const findFolder = require('./index');
     const dirs = await findFolder('/tmp/a');
     console.log(dirs);
   } catch (error) {
-    console.log('读取异常', error);
+    console.error('Read abnormity', error);
   }
 })();
