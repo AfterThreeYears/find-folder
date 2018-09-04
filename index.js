@@ -5,43 +5,50 @@ const _ = require('lodash');
 
 promisifyAll(fs);
 
-module.exports = async function foo(p) {
-  if (_.isString(p)) p = [{ path: p.trim(), type: 'dir' }];
-  if (_.isEmpty(p)) return [];
-  // 获取该目录下所有的文件
-  const dirs = [];
-  for (let index = 0; index < p.length; index++) {
-    let element = p[index];
-    if (_.isObject(element) && element.type === 'file') break;
-    debugger;
-    if (_.isObject(element)) element = element.path;
-    try {
-      const d = await generta(path.resolve(element));
-      debugger;
-      dirs.push(...d); 
-    } catch (error) {
-      console.log('读取类型错误', error);
-      process.exit(1);
-    }
-  }
-  debugger;
-  return p.concat(...(await foo(dirs)));
-}
-
-async function generta(p) {
-  let dirs = [];
+async function collect(route) {
+  let fileNames = [];
+  let stats = [];
   try {
-    dirs = await fs.readdirAsync(p);
-    dirs = dirs.map(dir => path.resolve(p, dir));
-    for (let index = 0; index < dirs.length; index++) {
-      const element = dirs[index];
-      const stat = await fs.statAsync(element);
-      dirs[index] = { path: element, type: stat.isDirectory() ? 'dir' : 'file' };
-    }
+    fileNames = await fs.readdirAsync(route);
+    stats = fileNames.map(filename => fs.statAsync(path.resolve(route, filename)));
+    stats = await Promise.all(stats);
   } catch (error) {
-    console.log('读取子目录失败', error);
+    console.error('[readdirAsync]: error is', error);
     process.exit(1);
   }
-  return dirs;
+  fileNames = fileNames
+    .map((filename, i) => {
+      return { path: path.resolve(route, filename), type: stats[i].isDirectory() ? 'dir' : 'file' }
+    });
+  return fileNames;
 }
 
+async function findFolder(p) {
+  if (_.isEmpty(p)) return [];
+  // 获取该目录下所有的文件
+  let dirs = [];
+  for (let i = 0; i < p.length; i += 1) {
+    let route = p[i];
+    if (_.isObject(route) && route.type === 'file') continue;
+    if (_.isObject(route)) route = route.path;
+    route = path.resolve(route);
+    dirs.push(collect(route));
+  }
+  try {
+    dirs = await Promise.all(dirs);
+    dirs = _.flatten(dirs);
+  } catch (error) {
+    console.error('[collect]: error is', error);
+    process.exit(1);
+  }
+  return p.concat(...(await findFolder(dirs)));
+}
+
+module.exports = function main(p) {
+  try {
+    if (_.isString(p)) p = [{ path: p.trim(), type: 'dir' }];
+    return findFolder(p);
+  } catch (error) {
+    console.error('[find-folder]: error is', error);
+  }
+};
