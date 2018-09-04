@@ -10,8 +10,8 @@ async function collect(route) {
   let stats = [];
   try {
     fileNames = await fs.readdirAsync(route);
-    stats = fileNames.map(filename => fs.statAsync(path.resolve(route, filename)));
-    stats = await Promise.all(stats);
+    const statsPromise = fileNames.map(filename => fs.statAsync(path.resolve(route, filename)));
+    stats = await Promise.all(statsPromise);
   } catch (error) {
     console.error('[readdirAsync]: error is', error);
     process.exit(1);
