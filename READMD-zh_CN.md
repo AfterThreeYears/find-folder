@@ -1,20 +1,20 @@
 # find-folder
 
-> Get all files in a directory
+> 得到某个目录下的所有文件
 
 ## language [简体中文](https://github.com/AfterThreeYears/find-folder/blob/master/READMD-zh_CN.md.md) [English](https://github.com/AfterThreeYears/find-folder/blob/master/READMD.md)
 
 ## 🚀 Usage
 
-### 1. installation
+### 1. 安装
 
 ```shell
   npm install --save find-folder
 ```
 
-### 2. Usage:
+### 2. 使用:
 
-**If you have the following folders**
+假如有如下文件夹
 ```sh
 ➜  root pwd
 /tmp/root
@@ -32,7 +32,7 @@ const find = require('find-folder');
   const data = await find('/tmp/root');
   console.log(data);
 })();
-// Return the following contents
+// 返回如下内容
 // [ { path: '/tmp/root', type: 'dir' },
 //   { path: '/tmp/root/a', type: 'dir' },
 //   { path: '/tmp/root/b', type: 'dir' },
@@ -40,17 +40,17 @@ const find = require('find-folder');
 //   { path: '/tmp/root/b/index.js', type: 'file' } ]
 ```
 
-### 3. option:
+### 3. 选项:
 
 **path:**
-Initialization path, example
+初始化路径, 例子
 ```javascript
 const find = require('find-folder');
 (async () => {
   const data = await find({ path: '/tmp/root' });
   console.log(data);
 })();
-// Return the following contents
+// 返回如下内容
 // [ { path: '/tmp/root', type: 'dir' },
 //   { path: '/tmp/root/a', type: 'dir' },
 //   { path: '/tmp/root/b', type: 'dir' },
@@ -58,14 +58,14 @@ const find = require('find-folder');
 //   { path: '/tmp/root/b/index.js', type: 'file' } ]
 ```
 **type:**
-There are two ways to search: `DFS` depth first and `BFS` breadth first, default **breadth first**.
+搜索方式，有两种方式`DFS`深度优先和 `BFS`广度优先，默认**广度优先**
 ```javascript
 const find = require('find-folder');
 (async () => {
   const data = await find({ path: '/tmp/root', type: 'DFS' });
   console.log(data);
 })();
-// Return the following contents
+// 返回如下内容
 // [ { path: '/tmp/root', type: 'dir' },
 //   { path: '/tmp/root/a', type: 'dir' },
 //   { path: '/tmp/root/a/index.js', type: 'file' },
@@ -73,34 +73,34 @@ const find = require('find-folder');
 //   { path: '/tmp/root/b/index.js', type: 'file' } ]
 ```
 **ignore:**
-Ignored folder
+忽略的文件夹
 ```javascript
 const find = require('find-folder');
 (async () => {
   const data = await find({ path: '/tmp/root', ignore: ['/tmp/root/b'] });
   console.log(data);
 })();
-// Return the following contents
+// 返回如下内容
 //[ { path: '/tmp/root', type: 'dir' },
 //  { path: '/tmp/root/a', type: 'dir' },
 //  { path: '/tmp/root/a/index.js', type: 'file' },
 ```
 
 **depth:**
-Depth of search
+往下寻找的深度
 ```javascript
 const find = require('find-folder');
 (async () => {
   const data = await find({ path: '/tmp/root', ignore: ['/tmp/root/b'] });
   console.log(data);
 })();
-// Return the following contents
+// 返回如下内容
 // [ { path: '/tmp/root', type: 'dir' },
 // { path: '/tmp/root/a', type: 'dir' },
 // { path: '/tmp/root/b', type: 'dir' } ]
 ```
 
-### 4. unit testing:
+### 4. 单元测试:
 
 
 ```shell
