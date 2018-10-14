@@ -2,7 +2,7 @@
 
 > 得到某个目录下的所有文件
 
-## language [简体中文](https://github.com/AfterThreeYears/find-folder/blob/master/READMD-zh_CN.md.md) [English](https://github.com/AfterThreeYears/find-folder/blob/master/READMD.md)
+## language [简体中文](https://github.com/AfterThreeYears/find-folder/blob/master/README-zh_CN.md.md) [English](https://github.com/AfterThreeYears/find-folder/blob/master/README.md)
 
 ## 🚀 Usage
 
