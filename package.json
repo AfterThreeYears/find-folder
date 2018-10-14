@@ -1,15 +1,14 @@
 {
   "name": "find-folder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "sh ./test/dir.sh && jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.5.2",
-    "lodash": "^4.17.10"
+    "jest": "^23.6.0"
   }
 }
