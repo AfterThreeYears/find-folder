@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "sh ./test/dir.sh && jest"
+    "test": "sh ./test/dir.sh && jest",
+    "debug": "node --inspect-brk node_modules/.bin/jest"
   },
   "author": "",
   "license": "ISC",
