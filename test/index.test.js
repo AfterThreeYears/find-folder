@@ -65,8 +65,8 @@ const depth = [ { path: '/tmp/find-folder', type: DIRECTORY },
 const typeMap = [
   {"path": `${__dirname}/resource`, "type": DIRECTORY},
   {"path": `${__dirname}/resource/file`, "type": FILE},
-  {"path": `${__dirname}/resource/pipename`, "type": FIFO},
-  {"path": `${__dirname}/resource/socket`, "type": SOCKET},
+  // {"path": `${__dirname}/resource/pipename`, "type": FIFO},
+  // {"path": `${__dirname}/resource/socket`, "type": SOCKET},
   {"path": `${__dirname}/resource/soft-file`, "type": SYMBOLICLINK},
 ];
 
