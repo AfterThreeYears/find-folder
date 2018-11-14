@@ -100,6 +100,20 @@ const find = require('find-folder');
 // { path: '/tmp/root/b', type: 'dir' } ]
 ```
 
+**file type:**
+```javascript
+{
+  FILE: 'FILE',
+  DIRECTORY: 'DIRECTORY',
+  SYMBOLICLINK: 'SYMBOLICLINK',
+  FIFO: 'FIFO',
+  SOCKET: 'SOCKET',
+  BLOCKDEVICE: 'BLOCKDEVICE',
+  CHARACTERDEVICE: 'CHARACTERDEVICE',
+  UNKNOWN: 'UNKNOWN',
+}
+```
+
 ### 4. unit testing:
 
 
@@ -112,16 +126,17 @@ const find = require('find-folder');
 > sh ./test/dir.sh && jest
 
  PASS  test/index.test.js
-  ✓ defualt (12ms)
-  ✓ BFS (2ms)
+  ✓ defualt (36ms)
+  ✓ BFS (17ms)
   ✓ DFS (3ms)
-  ✓ ignore (2ms)
-  ✓ deep (1ms)
+  ✓ ignore (4ms)
+  ✓ deep (2ms)
+  ✓ test type (1ms)
 
 Test Suites: 1 passed, 1 total
-Tests:       5 passed, 5 total
+Tests:       6 passed, 6 total
 Snapshots:   0 total
-Time:        1.292s
+Time:        1.204s
 Ran all test suites.
 ```
 
